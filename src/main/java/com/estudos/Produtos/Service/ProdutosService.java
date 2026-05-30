@@ -34,7 +34,7 @@ public class ProdutosService {
         return produtosRepository.findAll();
     }
 
-    public ProdutosModel acharPorId(Long id, ProdutosModel produtos) {
+    public ProdutosModel acharPorId(Long id) {
         return produtosRepository.findById(id).orElseThrow(
                 () -> new RuntimeException("Produto nåo existe!")
         );
