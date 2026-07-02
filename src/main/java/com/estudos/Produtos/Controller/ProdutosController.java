@@ -49,7 +49,7 @@ public class ProdutosController {
         return ResponseEntity.status(201).body(atualizar);
     }
 
-    @DeleteMapping("/{id}}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletarPorId(@PathVariable Long id){
         return ResponseEntity.noContent().build();
     }
