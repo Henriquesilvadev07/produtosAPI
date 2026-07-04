@@ -11,17 +11,15 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Usuarios {
+public class UsuariosModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(unique = true)
-    @NotBlank(message = "é necessário colocar o login")
     private String login;
 
-    @NotBlank(message = "é necessário colocar a senha")
     private String senha;
 
 
