@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -29,7 +30,8 @@ public class SecurityFilter extends OncePerRequestFilter {
 
        if (tokenJWT != null) {
            var subject = tokenService.getSubject(tokenJWT);
-           var usuario = usuariosRepository.findByLogin(subject);
+           var usuario = usuariosRepository.findByLogin(subject)
+                   .orElseThrow(() -> new UsernameNotFoundException("Usuario nao encontrado"));
            var authentication = new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities());
            SecurityContextHolder.getContext().setAuthentication(authentication);
        }
