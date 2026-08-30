@@ -1,5 +1,6 @@
 package com.estudos.Produtos.Users;
 
+import com.estudos.Produtos.Dto.UsuariosDto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -27,6 +28,11 @@ public class UsuariosModel implements UserDetails {
     private String login;
 
     private String senha;
+
+    public UsuariosModel(UsuariosDto dto) {
+        this.login = dto.login();
+        this.senha = dto.senha();
+    }
 
 
     @Override
