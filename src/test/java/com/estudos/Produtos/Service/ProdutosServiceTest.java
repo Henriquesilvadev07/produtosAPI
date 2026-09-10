@@ -61,7 +61,7 @@ class ProdutosServiceTest {
     }
 
     @Test
-    @DisplayName("Should list all products saved")
+    @DisplayName("Should list all products successfully")
     void listar() {
     }
 }
