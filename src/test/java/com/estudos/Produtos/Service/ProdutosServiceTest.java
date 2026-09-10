@@ -14,6 +14,8 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -61,7 +63,31 @@ class ProdutosServiceTest {
     }
 
     @Test
-    @DisplayName("Should list all products saved")
+    @DisplayName("Should list all products successfully")
     void listar() {
+        ProdutosModel produtos1 = new ProdutosModel();
+        produtos1.setNome("Sabao");
+        produtos1.setCategoria(CategoriaEnum.OUTROS);
+        produtos1.setDescricao("Sabunete corporal");
+        produtos1.setPreco(BigDecimal.valueOf(2.99));
+        produtos1.setEstoque(200);
+
+        ProdutosModel produtos2 = new ProdutosModel();
+        produtos2.setNome("Miojo");
+        produtos2.setCategoria(CategoriaEnum.ALIMENTO);
+        produtos2.setDescricao("Lamen rapido");
+        produtos2.setPreco(BigDecimal.valueOf(3.42));
+        produtos2.setEstoque(232);
+
+        List<ProdutosModel> listarMocks = Arrays.asList(produtos1, produtos2);
+
+        when(produtosRepository.findAll()).thenReturn(listarMocks);
+
+        List<ProdutosModel> produtosSalvos = produtosService.Listar();
+
+        assertNotNull(produtosSalvos);
+        assertEquals(2, produtosSalvos.size());
+        assertEquals("Sabao", produtosSalvos.get(0).getNome());
+        assertEquals("Miojo", produtosSalvos.get(1).getNome());
     }
 }
