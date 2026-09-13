@@ -18,9 +18,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class ProdutosServiceTest {
@@ -89,5 +89,14 @@ class ProdutosServiceTest {
         assertEquals(2, produtosSalvos.size());
         assertEquals("Sabao", produtosSalvos.get(0).getNome());
         assertEquals("Miojo", produtosSalvos.get(1).getNome());
+    }
+
+    @Test
+    @DisplayName("Should delete the Produtos successfully")
+    void deletarWithSucess() {
+        Long id = 1L;
+        when(produtosRepository.existsById(id)).thenReturn(true);
+        produtosService.deletarPorId(id);
+        verify(produtosRepository, times(1)).deleteById(id);
     }
 }
