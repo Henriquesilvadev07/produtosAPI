@@ -17,10 +17,9 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class ProdutosServiceTest {
@@ -89,5 +88,26 @@ class ProdutosServiceTest {
         assertEquals(2, produtosSalvos.size());
         assertEquals("Sabao", produtosSalvos.get(0).getNome());
         assertEquals("Miojo", produtosSalvos.get(1).getNome());
+    }
+
+    @Test
+    @DisplayName("Should delete the Produtos successfully")
+    void deletarWithSucess() {
+        Long id = 1L;
+        when(produtosRepository.existsById(id)).thenReturn(true);
+        produtosService.deletarPorId(id);
+        verify(produtosRepository, times(1)).deleteById(id);
+    }
+
+    @Test
+    @DisplayName("Should throw exception when try to delete with invalid id")
+    void deletarWithException() {
+        Long id = 50L;
+        when(produtosRepository.existsById(id)).thenReturn(false);
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
+            produtosService.deletarPorId(id);
+        });
+        assertEquals("Produto não existe!", exception.getMessage());
+        verify(produtosRepository, never()).deleteById(id);
     }
 }
