@@ -51,7 +51,7 @@ public class ProdutosService {
         produtos.setDescricao(dto.descricao());
         produtos.setEstoque(dto.estoque());
 
-        return produtosRepository.saveAndFlush(produtos);
+        return produtosRepository.save(produtos);
     }
 
     public void deletarPorId(Long id){
