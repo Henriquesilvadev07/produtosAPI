@@ -115,7 +115,29 @@ class ProdutosServiceTest {
     @Test
     @DisplayName("Should atualizar with success")
     void atualizarWithSuccess() {
+        Long id = 2L;
+        ProdutosDto dto = new ProdutosDto(
+                "sabao",
+                "sabonete de banho",
+                BigDecimal.valueOf(2.99),
+                CategoriaEnum.OUTROS,
+                300);
+        ProdutosModel produtos = new ProdutosModel();
+        produtos.setNome(dto.nome());
+        produtos.setCategoria(dto.categoria());
+        produtos.setDescricao(dto.descricao());
+        produtos.setPreco(dto.preco());
+        produtos.setEstoque(dto.estoque());
 
+        when(produtosRepository.findById(id)).thenReturn(Optional.of(produtos));
+        when(produtosRepository.save(any(ProdutosModel.class))).thenReturn(produtos);
+
+        ProdutosModel produtosAtualizado = produtosService.atualizarPorId(id, dto);
+
+        assertNotNull(produtosAtualizado);
+        assertEquals("sabao", produtosAtualizado.getNome());
+
+        verify(produtosRepository, times(1)).save(any(ProdutosModel.class));
 
     }
 }
