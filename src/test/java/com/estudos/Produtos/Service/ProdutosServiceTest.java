@@ -140,4 +140,33 @@ class ProdutosServiceTest {
         verify(produtosRepository, times(1)).save(any(ProdutosModel.class));
 
     }
+
+    @Test
+    @DisplayName("Should return exception with a invalid ID")
+    void atualizarWithError(){
+        Long id = 2L;
+        ProdutosDto dto = new ProdutosDto(
+                "sabao",
+                "sabonete de banho",
+                BigDecimal.valueOf(2.99),
+                CategoriaEnum.OUTROS,
+                300);
+        ProdutosModel produtos = new ProdutosModel();
+        produtos.setNome(dto.nome());
+        produtos.setCategoria(dto.categoria());
+        produtos.setDescricao(dto.descricao());
+        produtos.setPreco(dto.preco());
+        produtos.setEstoque(dto.estoque());
+
+        when(produtosRepository.findById(id)).thenReturn(Optional.empty());
+
+        RuntimeException exception = assertThrows(RuntimeException.class, ()->{
+            produtosService.atualizarPorId(id,dto);
+        });
+
+        assertEquals("Produto não existe!", exception.getMessage());
+
+        verify(produtosRepository, never()).save(any(ProdutosModel.class));
+
+    }
 }
