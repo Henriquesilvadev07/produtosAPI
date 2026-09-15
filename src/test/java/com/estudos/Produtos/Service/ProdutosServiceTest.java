@@ -174,5 +174,24 @@ class ProdutosServiceTest {
     @DisplayName("Should find produto by id successfully")
     void procurarWithSuccess() {
 
+        Long id = 1L;
+
+        ProdutosModel produtos = new ProdutosModel();
+        produtos.setId(id);
+        produtos.setNome("sabao");
+        produtos.setDescricao("sabonete de banho");
+        produtos.setCategoria(CategoriaEnum.OUTROS);
+        produtos.setPreco(BigDecimal.valueOf(2.99));
+        produtos.setEstoque(200);
+
+        when(produtosRepository.findById(id)).thenReturn(Optional.of(produtos));
+
+        ProdutosModel produtosAchados = produtosService.acharPorId(id);
+
+        assertNotNull(produtosAchados);
+        assertEquals("sabao", produtosAchados.getNome());
+
+        verify(produtosRepository, times(1)).findById(id);
+
     }
 }
