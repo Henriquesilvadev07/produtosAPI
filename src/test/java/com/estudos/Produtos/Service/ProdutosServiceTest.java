@@ -169,4 +169,10 @@ class ProdutosServiceTest {
         verify(produtosRepository, never()).save(any(ProdutosModel.class));
 
     }
+
+    @Test
+    @DisplayName("Should find produto by id successfully")
+    void procurarWithSuccess() {
+
+    }
 }
