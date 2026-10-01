@@ -3,20 +3,18 @@ package com.estudos.Produtos.Service;
 import com.estudos.Produtos.Dto.ProdutosDto;
 import com.estudos.Produtos.Model.ProdutosModel;
 import com.estudos.Produtos.Repository.ProdutosRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class ProdutosService {
 
 
-    private ProdutosRepository produtosRepository;
-
-    public ProdutosService(ProdutosRepository produtosRepository) {
-        this.produtosRepository = produtosRepository;
-    }
+    private final ProdutosRepository produtosRepository;
 
     public ProdutosModel salvar(ProdutosDto dto) {
         ProdutosModel produtos = new ProdutosModel();

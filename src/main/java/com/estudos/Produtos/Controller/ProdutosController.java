@@ -4,23 +4,21 @@ import com.estudos.Produtos.Dto.ProdutosDto;
 import com.estudos.Produtos.Model.ProdutosModel;
 import com.estudos.Produtos.Service.ProdutosService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+@RequiredArgsConstructor
 public class ProdutosController {
 
 
-    private ProdutosService produtosService;
+    private final ProdutosService produtosService;
 
-    public ProdutosController(ProdutosService produtosService) {
-        this.produtosService = produtosService;
-    }
 
 
     @PostMapping
