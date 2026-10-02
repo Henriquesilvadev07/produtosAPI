@@ -10,6 +10,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -45,6 +46,9 @@ public class ProdutosServiceIntegrationTest {
                 .content(jsonPayLoad))
                 .andExpect(status().isCreated());
 
+
+        boolean salvoNoBanco = produtosRepository.existsByNome("sabonete");
+        assertTrue(salvoNoBanco, "o produto foi salvo no banco de dados com sucesso");
 
 
     }
