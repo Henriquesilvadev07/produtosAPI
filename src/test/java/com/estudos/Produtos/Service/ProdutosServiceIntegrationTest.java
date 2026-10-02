@@ -17,6 +17,16 @@ public class ProdutosServiceIntegrationTest {
     @WithMockUser(username = "operador", roles = {"USER"})
     void salvarProdutoComSucesso() {
 
+        String jsonPayLoad =    """
+                {
+                "nome" : "sabonete",
+                "descricao" : "produto de higiene pessoal",
+                "preco" : "2.90",
+                "categoria" : "OUTROS",
+                "estoque" : 200
+                }
+                """;
+
     }
 
 
