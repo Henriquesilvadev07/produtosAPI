@@ -1,5 +1,7 @@
 package com.estudos.Produtos.Service;
 
+import com.estudos.Produtos.Model.CategoriaEnum;
+import com.estudos.Produtos.Model.ProdutosModel;
 import com.estudos.Produtos.Repository.ProdutosRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,9 +12,14 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.math.BigDecimal;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -53,7 +60,27 @@ public class ProdutosServiceIntegrationTest {
 
     }
 
+    @Test
+    @DisplayName("deve retornar sucesso ao listar todos os produtos salvos")
+    @WithMockUser(username = "operador", roles = {"USER"})
+    void listarProdutoComSucesso() throws Exception{
 
+        ProdutosModel produtos = new ProdutosModel();
+        produtos.setNome("sabao");
+        produtos.setCategoria(CategoriaEnum.OUTROS);
+        produtos.setDescricao("Sabunete corporal");
+        produtos.setPreco(BigDecimal.valueOf(2.99));
+        produtos.setEstoque(200);
+        produtosRepository.save(produtos);
+
+        mockMvc.perform(get("/api"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isArray())
+                .andExpect(jsonPath("$.length()").value(1))
+                .andExpect(jsonPath("$[0].nome").value("sabao"));
+
+
+    }
 
 
 }
