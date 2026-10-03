@@ -53,7 +53,12 @@ public class ProdutosServiceIntegrationTest {
 
     }
 
+    @Test
+    @DisplayName("deve retornar sucesso ao listar todos os produtos salvos")
+    @WithMockUser(username = "operador", roles = {"USER"})
+    void listarProdutoComSucesso() {
 
+    }
 
 
 }
