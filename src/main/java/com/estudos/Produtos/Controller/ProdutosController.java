@@ -32,7 +32,7 @@ public class ProdutosController {
     @GetMapping
     public ResponseEntity<List<ProdutosModel>> listar() {
         var produto = produtosService.Listar();
-        return ResponseEntity.status(201).body(produto);
+        return ResponseEntity.status(200).body(produto);
     }
 
     @GetMapping("/{id}")
