@@ -95,6 +95,11 @@ public class ProdutosServiceIntegrationTest {
         produtos.setEstoque(200);
         produtosRepository.save(produtos);
 
+        mockMvc.perform(get("/api/1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(1))
+                .andExpect(jsonPath("$.nome").value("sabao"))
+                .andExpect(jsonPath("$.estoque").value(200));
 
 
     }
