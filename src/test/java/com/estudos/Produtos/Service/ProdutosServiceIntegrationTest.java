@@ -87,6 +87,14 @@ public class ProdutosServiceIntegrationTest {
     @WithMockUser(username = "operador", roles = {"USER"})
     void acharPorIdComSucesso() {
 
+        ProdutosModel produtos = new ProdutosModel();
+        produtos.setNome("sabao");
+        produtos.setCategoria(CategoriaEnum.OUTROS);
+        produtos.setDescricao("Sabunete corporal");
+        produtos.setPreco(BigDecimal.valueOf(2.99));
+        produtos.setEstoque(200);
+        produtosRepository.save(produtos);
+
     }
 
 
