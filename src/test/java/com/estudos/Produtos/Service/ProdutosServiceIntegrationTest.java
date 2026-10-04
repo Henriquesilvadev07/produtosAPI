@@ -82,5 +82,27 @@ public class ProdutosServiceIntegrationTest {
 
     }
 
+    @Test
+    @DisplayName("deve retornar sucesso ao procurar por um id valido")
+    @WithMockUser(username = "operador", roles = {"USER"})
+    void acharPorIdComSucesso() throws Exception{
+
+        ProdutosModel produtos = new ProdutosModel();
+        produtos.setNome("sabao");
+        produtos.setCategoria(CategoriaEnum.OUTROS);
+        produtos.setDescricao("Sabunete corporal");
+        produtos.setPreco(BigDecimal.valueOf(2.99));
+        produtos.setEstoque(200);
+        produtosRepository.save(produtos);
+
+        mockMvc.perform(get("/api/1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(1))
+                .andExpect(jsonPath("$.nome").value("sabao"))
+                .andExpect(jsonPath("$.estoque").value(200));
+
+
+    }
+
 
 }

@@ -38,7 +38,7 @@ public class ProdutosController {
     @GetMapping("/{id}")
     public ResponseEntity<ProdutosModel> acharPorId(@PathVariable Long id){
         var produto = produtosService.acharPorId(id);
-        return ResponseEntity.status(201).body(produto);
+        return ResponseEntity.status(200).body(produto);
     }
 
     @PutMapping("/{id}")
