@@ -85,7 +85,7 @@ public class ProdutosServiceIntegrationTest {
     @Test
     @DisplayName("deve retornar sucesso ao procurar por um id valido")
     @WithMockUser(username = "operador", roles = {"USER"})
-    void acharPorIdComSucesso() {
+    void acharPorIdComSucesso() throws Exception{
 
         ProdutosModel produtos = new ProdutosModel();
         produtos.setNome("sabao");
@@ -94,6 +94,8 @@ public class ProdutosServiceIntegrationTest {
         produtos.setPreco(BigDecimal.valueOf(2.99));
         produtos.setEstoque(200);
         produtosRepository.save(produtos);
+
+
 
     }
 
