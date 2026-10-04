@@ -82,5 +82,12 @@ public class ProdutosServiceIntegrationTest {
 
     }
 
+    @Test
+    @DisplayName("deve retornar sucesso ao procurar por um id valido")
+    @WithMockUser(username = "operador", roles = {"USER"})
+    void acharPorIdComSucesso() {
+
+    }
+
 
 }
