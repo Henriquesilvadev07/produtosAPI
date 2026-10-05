@@ -104,5 +104,12 @@ public class ProdutosServiceIntegrationTest {
 
     }
 
+    @Test
+    @DisplayName("deve retornar uma exception ao tentar procurar produto com id invalido")
+    @WithMockUser(username = "operador", roles = {"USER"})
+    void acharPorIdComException() throws Exception{
+
+    }
+
 
 }
