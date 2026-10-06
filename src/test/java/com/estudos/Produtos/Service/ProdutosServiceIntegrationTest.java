@@ -118,6 +118,13 @@ public class ProdutosServiceIntegrationTest {
     @DisplayName("deve atualizar por id com sucesso")
     @WithMockUser(username = "operador", roles = {"USER"})
     void atualizarComSucesso() {
+        ProdutosModel produtos = new ProdutosModel();
+        produtos.setNome("sabao");
+        produtos.setCategoria(CategoriaEnum.OUTROS);
+        produtos.setDescricao("Sabunete corporal");
+        produtos.setPreco(BigDecimal.valueOf(2.99));
+        produtos.setEstoque(200);
+
 
     }
 
