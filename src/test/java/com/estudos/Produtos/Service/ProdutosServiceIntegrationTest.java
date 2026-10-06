@@ -14,11 +14,10 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -111,6 +110,38 @@ public class ProdutosServiceIntegrationTest {
 
         mockMvc.perform(get("/api/1"))
                 .andExpect(status().isNotFound());
+
+    }
+
+    @Test
+    @DisplayName("deve atualizar por id com sucesso")
+    @WithMockUser(username = "operador", roles = {"USER"})
+    void atualizarComSucesso() throws Exception {
+        ProdutosModel produtos = new ProdutosModel();
+        produtos.setNome("sabao");
+        produtos.setCategoria(CategoriaEnum.OUTROS);
+        produtos.setDescricao("Sabunete corporal");
+        produtos.setPreco(BigDecimal.valueOf(2.99));
+        produtos.setEstoque(200);
+        produtosRepository.save(produtos);
+
+        String jsonPayLoad = """
+                {
+                "nome" : "sabonete",
+                "descricao" : "produto de higiene pessoal",
+                "preco" : "2.90",
+                "categoria" : "OUTROS",
+                "estoque" : 200
+                }
+                """;
+
+        mockMvc.perform(put("/api/" + produtos.getId())
+                .contentType(APPLICATION_JSON)
+                .content(jsonPayLoad))
+                .andExpect(status().isCreated());
+
+        ProdutosModel produtoAtualizado = produtosRepository.findById(produtos.getId()).get();
+        assertEquals("sabonete", produtoAtualizado.getNome());
 
     }
 
