@@ -14,10 +14,10 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -135,7 +135,13 @@ public class ProdutosServiceIntegrationTest {
                 }
                 """;
 
+        mockMvc.perform(put("/api/" + produtos.getId())
+                .contentType(APPLICATION_JSON)
+                .content(jsonPayLoad))
+                .andExpect(status().isCreated());
 
+        ProdutosModel produtoAtualizado = produtosRepository.findById(produtos.getId()).get();
+        assertEquals("sabonete", produtoAtualizado.getNome());
 
     }
 
