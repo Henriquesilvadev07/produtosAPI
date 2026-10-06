@@ -114,5 +114,12 @@ public class ProdutosServiceIntegrationTest {
 
     }
 
+    @Test
+    @DisplayName("deve atualizar por id com sucesso")
+    @WithMockUser(username = "operador", roles = {"USER"})
+    void atualizarComSucesso() {
+
+    }
+
 
 }
