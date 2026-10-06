@@ -16,9 +16,8 @@ import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -117,13 +116,16 @@ public class ProdutosServiceIntegrationTest {
     @Test
     @DisplayName("deve atualizar por id com sucesso")
     @WithMockUser(username = "operador", roles = {"USER"})
-    void atualizarComSucesso() {
+    void atualizarComSucesso() throws Exception {
         ProdutosModel produtos = new ProdutosModel();
         produtos.setNome("sabao");
         produtos.setCategoria(CategoriaEnum.OUTROS);
         produtos.setDescricao("Sabunete corporal");
         produtos.setPreco(BigDecimal.valueOf(2.99));
         produtos.setEstoque(200);
+        produtosRepository.save(produtos);
+
+
 
 
     }
