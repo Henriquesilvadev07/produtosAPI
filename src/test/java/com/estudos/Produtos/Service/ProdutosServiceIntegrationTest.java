@@ -125,6 +125,15 @@ public class ProdutosServiceIntegrationTest {
         produtos.setEstoque(200);
         produtosRepository.save(produtos);
 
+        String jsonPayLoad = """
+                {
+                "nome" : "sabonete",
+                "descricao" : "produto de higiene pessoal",
+                "preco" : "2.90",
+                "categoria" : "OUTROS",
+                "estoque" : 200
+                }
+                """;
 
 
 
