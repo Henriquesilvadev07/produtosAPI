@@ -145,5 +145,15 @@ public class ProdutosServiceIntegrationTest {
 
     }
 
+    @Test
+    @DisplayName("deve retornar exception ao tentar atualizar por um id invalido")
+    @WithMockUser(username = "operador", roles = {"USER"})
+    void atualizarPorIdComException() throws Exception{
+
+        mockMvc.perform(put("/api/1"))
+                .andExpect(status().isNotFound());
+
+    }
+
 
 }
