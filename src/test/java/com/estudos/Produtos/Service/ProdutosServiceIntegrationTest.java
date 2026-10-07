@@ -150,6 +150,8 @@ public class ProdutosServiceIntegrationTest {
     @WithMockUser(username = "operador", roles = {"USER"})
     void atualizarPorIdComException() throws Exception{
 
+        mockMvc.perform(put("/api/1"))
+                .andExpect(status().isNotFound());
 
     }
 
