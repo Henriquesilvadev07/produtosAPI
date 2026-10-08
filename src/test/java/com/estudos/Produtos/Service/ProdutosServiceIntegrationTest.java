@@ -108,7 +108,7 @@ public class ProdutosServiceIntegrationTest {
     @WithMockUser(username = "operador", roles = {"USER"})
     void acharPorIdComException() throws Exception{
 
-        mockMvc.perform(get("/api/1"))
+        mockMvc.perform(get("/api/55"))
                 .andExpect(status().isNotFound());
 
     }
