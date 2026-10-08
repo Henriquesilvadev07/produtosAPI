@@ -159,6 +159,15 @@ public class ProdutosServiceIntegrationTest {
     @DisplayName("deve retornar sucesso ao deletar produto por um id valido")
     @WithMockUser(username = "operador", roles = {"USER"})
     void deletarPorIdComSucesso() throws Exception{
+        ProdutosModel produtos = new ProdutosModel();
+        produtos.setNome("sabao");
+        produtos.setCategoria(CategoriaEnum.OUTROS);
+        produtos.setDescricao("Sabunete corporal");
+        produtos.setPreco(BigDecimal.valueOf(2.99));
+        produtos.setEstoque(200);
+        produtosRepository.save(produtos);
+
+
 
 
     }
