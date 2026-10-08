@@ -173,5 +173,12 @@ public class ProdutosServiceIntegrationTest {
 
     }
 
+    @Test
+    @DisplayName("deve retornar exception ao deletar produto por um id invalido")
+    @WithMockUser(username = "operador", roles = {"USER"})
+    void deletarPorIdComException() {
+
+    }
+
 
 }
