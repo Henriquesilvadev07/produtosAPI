@@ -155,5 +155,13 @@ public class ProdutosServiceIntegrationTest {
 
     }
 
+    @Test
+    @DisplayName("deve retornar sucesso ao deletar produto por um id valido")
+    @WithMockUser(username = "operador", roles = {"USER"})
+    void deletarPorIdComSucesso() {
+
+
+    }
+
 
 }
