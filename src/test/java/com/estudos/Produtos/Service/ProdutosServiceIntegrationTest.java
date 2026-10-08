@@ -178,7 +178,7 @@ public class ProdutosServiceIntegrationTest {
     @WithMockUser(username = "operador", roles = {"USER"})
     void deletarPorIdComException() throws Exception{
             mockMvc.perform(delete("/api/99"))
-                    .andExpect(status().isNoContent());
+                    .andExpect(status().isNotFound());
 
     }
 
