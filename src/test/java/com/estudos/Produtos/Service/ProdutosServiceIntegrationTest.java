@@ -167,7 +167,8 @@ public class ProdutosServiceIntegrationTest {
         produtos.setEstoque(200);
         produtosRepository.save(produtos);
 
-
+        mockMvc.perform(delete("/api/" + produtos.getId()))
+                .andExpect(status().isNoContent());
 
 
     }
