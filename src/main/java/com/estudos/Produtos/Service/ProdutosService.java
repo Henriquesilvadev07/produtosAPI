@@ -14,7 +14,7 @@ import java.util.List;
 public class ProdutosService {
 
 
-    private ProdutosRepository produtosRepository;
+    private final ProdutosRepository produtosRepository;
 
     public ProdutosModel salvar(ProdutosDto dto) {
         ProdutosModel produtos = new ProdutosModel();
@@ -34,13 +34,13 @@ public class ProdutosService {
 
     public ProdutosModel acharPorId(Long id) {
         return produtosRepository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("Produto não existe!")
+                () -> new RuntimeException("Produto não existe!")
         );
     }
 
     public ProdutosModel atualizarPorId(Long id, ProdutosDto dto) {
         ProdutosModel produtos = produtosRepository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("Produto não existe!")
+                () -> new RuntimeException("Produto não existe!")
         );
 
         produtos.setNome(dto.nome());
@@ -56,7 +56,7 @@ public class ProdutosService {
         if (produtosRepository.existsById(id)){
             produtosRepository.deleteById(id);
         }else{
-           throw new IllegalArgumentException("Produto não existe!");
+           throw new RuntimeException("Produto não existe!");
         }
 
     }

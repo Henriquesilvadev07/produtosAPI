@@ -3,6 +3,7 @@ package com.estudos.Produtos.Service;
 import com.estudos.Produtos.Model.CategoriaEnum;
 import com.estudos.Produtos.Model.ProdutosModel;
 import com.estudos.Produtos.Repository.ProdutosRepository;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
+@Transactional
 public class ProdutosServiceIntegrationTest {
 
     @Autowired
@@ -94,9 +96,9 @@ public class ProdutosServiceIntegrationTest {
         produtos.setEstoque(200);
         produtosRepository.save(produtos);
 
-        mockMvc.perform(get("/api/1"))
+        mockMvc.perform(get("/api/" + produtos.getId()))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(1))
+                .andExpect(jsonPath("$.id").value(produtos.getId()))
                 .andExpect(jsonPath("$.nome").value("sabao"))
                 .andExpect(jsonPath("$.estoque").value(200));
 
@@ -150,7 +152,19 @@ public class ProdutosServiceIntegrationTest {
     @WithMockUser(username = "operador", roles = {"USER"})
     void atualizarPorIdComException() throws Exception{
 
-        mockMvc.perform(put("/api/1"))
+        String jsonPayLoad = """
+                {
+                "nome" : "sabonete",
+                "descricao" : "produto de higiene pessoal",
+                "preco" : "2.90",
+                "categoria" : "OUTROS",
+                "estoque" : 200
+                }
+                """;
+
+        mockMvc.perform(put("/api/9999")
+                        .contentType(APPLICATION_JSON)
+                        .content(jsonPayLoad))
                 .andExpect(status().isNotFound());
 
     }
