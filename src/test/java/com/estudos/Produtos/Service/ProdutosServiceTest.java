@@ -34,11 +34,6 @@ class ProdutosServiceTest {
     private ProdutosService produtosService;
 
 
-    @BeforeEach
-    void setup(){
-        MockitoAnnotations.initMocks(this);
-    }
-
 
     @Test
     @DisplayName("Should save produtos")
