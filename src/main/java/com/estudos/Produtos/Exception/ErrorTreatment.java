@@ -14,6 +14,7 @@ public class ErrorTreatment {
         return ResponseEntity.status(404).body(ex.getMessage());
     }
 
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity tratarErro400(MethodArgumentNotValidException ex){
         var erros = ex.getFieldErrors()
