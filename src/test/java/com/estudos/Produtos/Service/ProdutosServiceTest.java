@@ -4,13 +4,11 @@ import com.estudos.Produtos.Dto.ProdutosDto;
 import com.estudos.Produtos.Model.CategoriaEnum;
 import com.estudos.Produtos.Model.ProdutosModel;
 import com.estudos.Produtos.Repository.ProdutosRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.context.ActiveProfiles;
 
@@ -196,14 +194,6 @@ class ProdutosServiceTest {
     void procurarWithError() {
 
         Long id = 2L;
-
-        ProdutosModel produtos = new ProdutosModel();
-        produtos.setId(id);
-        produtos.setNome("sabao");
-        produtos.setDescricao("sabonete de banho");
-        produtos.setCategoria(CategoriaEnum.OUTROS);
-        produtos.setPreco(BigDecimal.valueOf(2.99));
-        produtos.setEstoque(200);
 
         when(produtosRepository.findById(id)).thenReturn(Optional.empty());
 
