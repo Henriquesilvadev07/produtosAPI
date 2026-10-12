@@ -1,5 +1,6 @@
 package com.estudos.Produtos.Service;
 
+import com.estudos.Produtos.AbstractIntegrationTest;
 import com.estudos.Produtos.Model.CategoriaEnum;
 import com.estudos.Produtos.Model.ProdutosModel;
 import com.estudos.Produtos.Repository.ProdutosRepository;
@@ -26,7 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
 @Transactional
-public class ProdutosServiceIntegrationTest {
+public class ProdutosServiceIntegrationTest extends AbstractIntegrationTest {
 
     @Autowired
     private MockMvc mockMvc;
