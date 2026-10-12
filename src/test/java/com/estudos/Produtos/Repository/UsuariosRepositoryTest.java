@@ -1,5 +1,6 @@
 package com.estudos.Produtos.Repository;
 
+import com.estudos.Produtos.AbstractIntegrationTest;
 import com.estudos.Produtos.Dto.UsuariosDto;
 import com.estudos.Produtos.Users.UsuariosModel;
 import jakarta.persistence.EntityManager;
@@ -15,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @Transactional
 @ActiveProfiles("test")
-class UsuariosRepositoryTest {
+class UsuariosRepositoryTest extends AbstractIntegrationTest {
 
     @Autowired
     EntityManager entityManager;
